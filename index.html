@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เรียนภาษาไทย - พยัญชนะและสระ</title>
+    <!-- Tailwind CSS สำหรับจัดดีไซน์โทนสี แดง-ขาว -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#DC2626', // สีแดง (Red 600)
+                        primaryDark: '#B91C1C', // สีแดงเข้ม
+                        lightBg: '#F8FAFC',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Sarabun', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-lightBg min-h-screen text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-primary text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-wide">🇹🇭 เรียนภาษาไทยง่ายๆ (พยัญชนะ & สระ)</h1>
+            <p class="text-sm bg-white text-primary px-3 py-1 rounded-full font-semibold mt-2 sm:mt-0 shadow-inner">
+                ฟรี! ไม่ต้องสมัครสมาชิก
+            </p>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="max-w-6xl mx-auto px-4 mt-6">
+        <div class="flex justify-center space-x-4 border-b border-gray-300 pb-4">
+            <button onclick="switchTab('consonants')" id="btn-consonants" class="px-6 py-2.5 rounded-full font-bold text-lg bg-primary text-white shadow transition transform hover:scale-105">
+                พยัญชนะไทย (44 ตัว)
+            </button>
+            <button onclick="switchTab('vowels')" id="btn-vowels" class="px-6 py-2.5 rounded-full font-bold text-lg bg-white text-gray-600 border border-gray-300 shadow hover:bg-gray-100 transition transform hover:scale-105">
+                สระไทย (32 เสียง)
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-8">
+        <!-- ส่วนแสดงพยัญชนะ -->
+        <section id="section-consonants" class="tab-content">
+            <div class="text-center mb-6">
+                <h2 class="text-xl font-semibold text-primary">พยัญชนะไทย 44 ตัว</h2>
+                <p class="text-gray-500 text-sm">คลิกการ์ดหรือปุ่มฟังเสียงเพื่อฟังเสียงพยัญชนะ</p>
+            </div>
+            <div id="consonants-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <!-- Javascript จะเติมข้อมูลตรงนี้ -->
+            </div>
+        </section>
+
+        <!-- ส่วนแสดงสระ -->
+        <section id="section-vowels" class="tab-content hidden">
+            <div class="text-center mb-6">
+                <h2 class="text-xl font-semibold text-primary">สระไทย 32 เสียง</h2>
+                <p class="text-gray-500 text-sm">คลิกการ์ดหรือปุ่มฟังเสียงเพื่อฟังเสียงสระ</p>
+            </div>
+            <div id="vowels-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <!-- Javascript จะเติมข้อมูลตรงนี้ -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-12 py-6 text-center text-gray-500 text-sm">
+        <p>เว็บไซต์เพื่อการเรียนรู้ภาษาไทย • ออกแบบด้วยโทนสีแดง-ขาวสะอาดตา</p>
+    </footer>
+
+    <!-- JavaScript สำหรับระบบจัดการข้อมูลและเสียงพูด -->
+    <script>
+        // ข้อมูลพยัญชนะ 44 ตัว
+        const consonants = [
+            "ก ไก่", "ข ไข่", "ฃ ขวด", "ค ควาย", "ฅ ฅคน", "ฆ ระฆัง", 
+            "ง งู", "จ จาน", "ฉ ฉิ่ง", "ช ช้าง", "ซ โซ่", "ฌ เฌอ", 
+            "ญ หญิง", "ฎ ชฎา", "ฏ ปฏัก", "ฐ ฐาน", "ฑ มณโฑ", "ฒ ผู้เฒ่า", 
+            "ณ เณร", "ด เด็ก", "ต เต่า", "ถ ถุง", "ท ทหาร", "ธ ธง", 
+            "น หนู", "บ ใบไม้", "ป ปลา", "ผ ผึ้ง", "ฝ ฝา", "พ พาน", 
+            "ฟ ฟัน", "ภ สำเภา", "ม ม้า", "ย ยักษ์", "ร เรือ", "ล ลิง", 
+            "ว แหวน", "ศ ศาลา", "ษ ฤๅษี", "ส เสือ", "ห หีบ", "ฬ จุฬา", 
+            "อ อ่าง", "ฮ นกฮูก"
+        ];
+
+        // ข้อมูลสระไทย 28 เสียง
+        const vowels = [
+            "อะ", "อา", "อิ", "อี", "อึ", "อือ", "อุ", "อู", 
+            "เอะ", "เอ", "แอะ", "แอ", "โอะ", "โอ", "เอาะ", "ออ", 
+            "เออะ", "เออ", "เอียะ", "เอีย", "เอือะ", "เอือ", "อัวะ", "อัว", 
+            "อำ", "ใอ ไม้ม้วน", "ไอ ไม้มลาย", "เอา"  ];
+    // สลับแท็บ
+        function switchTab(tabName) {
+            const conSec = document.getElementById('section-consonants');
+            const vowSec = document.getElementById('section-vowels');
+            const btnCon = document.getElementById('btn-consonants');
+            const btnVow = document.getElementById('btn-vowels');
+
+            if (tabName === 'consonants') {
+                conSec.classList.remove('hidden');
+                vowSec.classList.add('hidden');
+                btnCon.className = "px-6 py-2.5 rounded-full font-bold text-lg bg-primary text-white shadow transition transform hover:scale-105";
+                btnVow.className = "px-6 py-2.5 rounded-full font-bold text-lg bg-white text-gray-600 border border-gray-300 shadow hover:bg-gray-100 transition transform hover:scale-105";
+            } else {
+                conSec.classList.add('hidden');
+                vowSec.classList.remove('hidden');
+                btnVow.className = "px-6 py-2.5 rounded-full font-bold text-lg bg-primary text-white shadow transition transform hover:scale-105";
+                btnCon.className = "px-6 py-2.5 rounded-full font-bold text-lg bg-white text-gray-600 border border-gray-300 shadow hover:bg-gray-100 transition transform hover:scale-105";
+            }
+        }
+
+        // สร้างการ์ดแสดงผล
+        function renderCards() {
+            const conGrid = document.getElementById('consonants-grid');
+            const vowGrid = document.getElementById('vowels-grid');
+
+            conGrid.innerHTML = consonants.map((item) => createCardHTML(item)).join('');
+            vowGrid.innerHTML = vowels.map((item) => createCardHTML(item)).join('');
+        }
+
+        function createCardHTML(text) {
+            // สำหรับพยัญชนะ เช่น "ก ไก่" จะแสดงตัว "ก" ตัวใหญ่, ส่วนสระจะแสดงเต็มคำเช่น "สระอะ"
+            const displayChar = text.startsWith("สระ") || text.startsWith("ตัว") ? text : text.split(' ')[0];
+            
+            return `
+                <div class="bg-white rounded-2xl shadow-md border border-gray-200 p-4 flex flex-col justify-between items-center transition hover:shadow-xl hover:border-primary group">
+                    <div onclick="playSound('${text.replace(/'/g, "\\'")}')" class="w-full text-center cursor-pointer py-4">
+                        <span class="text-3xl sm:text-4xl font-bold text-gray-800 group-hover:text-primary block mb-2">${displayChar}</span>
+                        <span class="text-xs text-gray-500 block truncate">${text}</span>
+                    </div>
+                    <div class="w-full pt-2 border-t border-gray-100">
+                        <button onclick="playSound('${text.replace(/'/g, "\\'")}')" class="w-full bg-red-50 hover:bg-primary hover:text-white text-primary text-xs font-semibold py-2 px-2 rounded-lg transition flex items-center justify-center space-x-1">
+                            <span>🔊 ฟังเสียง</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ระบบเล่นเสียงพูดผ่านเบราว์เซอร์
+        function playSound(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // หยุดเสียงค้างเก่า
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'th-TH';
+                utterance.rate = 0.8; // พูดช้าลงเล็กน้อยเพื่อให้ฟังง่าย
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("เบราว์เซอร์ของคุณไม่รองรับระบบเสียงพูด");
+            }
+        }
+
+        // เริ่มต้นโหลดข้อมูลเมื่อเปิดเว็บ
+        renderCards();
+    </script>
+</body>
+</html>
